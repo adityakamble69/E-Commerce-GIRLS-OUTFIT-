@@ -1,0 +1,903 @@
+/* ============================================================
+   style.css — Rang Indian Ethnic Wear
+   Sections:
+   1. Reset & CSS Variables
+   2. Base / Body
+   3. Navigation
+   4. Search Bar
+   5. Hero Section
+   6. Trust Band
+   7. Products Section (Section, Pills, Grid, Cards)
+   8. Cart Overlay & Drawer
+   9. Toast Notification
+   10. Footer
+   11. Utilities & Responsive
+============================================================ */
+
+
+/* ── 1. RESET & CSS VARIABLES ─────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --gold:        #C8963E;
+  --gold-light:  #F5E4C3;
+  --gold-dark:   #8A611A;
+  --rose:        #C25B6B;
+  --rose-light:  #F7E0E4;
+  --deep:        #1E1410;
+  --warm:        #F9F4EE;
+  --cream:       #FDF8F2;
+  --text:        #2D1F14;
+  --muted:       #7A6356;
+  --border:      #E8D9C8;
+  --card:        #FFFFFF;
+  --teal:        #2E7D6A;
+  --teal-light:  #D4EDEA;
+}
+
+
+/* ── 2. BASE / BODY ───────────────────────────────────────── */
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+
+/* ── 3. NAVIGATION ────────────────────────────────────────── */
+
+nav {
+  background: var(--deep);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: #C4B49E;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav-icon-btn {
+  background: none;
+  border: none;
+  color: #C4B49E;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-icon-btn:hover {
+  color: var(--gold);
+}
+
+.cart-badge {
+  background: var(--rose);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 1px 6px;
+  border-radius: 20px;
+  min-width: 18px;
+  text-align: center;
+}
+
+
+/* ── 4. SEARCH BAR ────────────────────────────────────────── */
+
+.search-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2rem 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1.25rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  background: white;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: var(--gold);
+}
+
+.search-input::placeholder {
+  color: var(--muted);
+}
+
+.sort-select {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  background: white;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+
+/* ── 5. HERO SECTION ──────────────────────────────────────── */
+
+.hero {
+  background: linear-gradient(135deg, #1E1410 0%, #3D2314 50%, #5C2E1A 100%);
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative glow circle behind heading */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,150,62,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: #FDF8F2;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  font-weight: 400;
+}
+
+.hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.hero p {
+  color: #B09A88;
+  font-size: 1.05rem;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--deep);
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: background 0.2s, transform 0.15s;
+  cursor: pointer;
+  border: none;
+}
+
+.hero-cta:hover {
+  background: #daa94d;
+  transform: translateY(-1px);
+}
+
+.hero-cta-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(200,150,62,0.5);
+  color: var(--gold-light);
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 0.9rem;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+  background: none;
+  margin-left: 1rem;
+}
+
+.hero-cta-outline:hover {
+  border-color: var(--gold);
+  background: rgba(200,150,62,0.08);
+}
+
+
+/* ── 6. TRUST BAND ────────────────────────────────────────── */
+
+.trust-band {
+  background: var(--deep);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.trust-icon {
+  font-size: 1.4rem;
+  color: var(--gold);
+}
+
+.trust-label {
+  font-size: 0.78rem;
+  color: #C4B49E;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 400;
+}
+
+
+/* ── 7. PRODUCTS SECTION ──────────────────────────────────── */
+
+/* Section wrapper */
+.section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.section-title span {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.view-all {
+  font-size: 0.8rem;
+  color: var(--gold-dark);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 1px solid var(--gold-dark);
+  padding-bottom: 1px;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  transition: color 0.2s;
+}
+
+.view-all:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* Category filter pills */
+.category-pills {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.pill {
+  padding: 0.5rem 1.25rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--muted);
+}
+
+.pill.active {
+  background: var(--deep);
+  color: var(--gold);
+  border-color: var(--deep);
+}
+
+.pill:hover:not(.active) {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Product card */
+.product-card {
+  background: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(30,20,16,0.12);
+}
+
+/* Product image area */
+.product-img-wrapper {
+  position: relative;
+  aspect-ratio: 3/4;
+  background: var(--warm);
+  overflow: hidden;
+}
+
+.product-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.product-card:hover .product-img-wrapper img {
+  transform: scale(1.04);
+}
+
+/* Sale / New badge */
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--rose);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+}
+
+.product-badge.new {
+  background: var(--teal);
+}
+
+/* Wishlist heart button */
+.product-wishlist {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+  color: #C8963E;
+}
+
+.product-wishlist:hover,
+.product-wishlist.active {
+  background: var(--rose-light);
+  border-color: var(--rose);
+  color: var(--rose);
+}
+
+/* Product text info */
+.product-info {
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.product-category {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.product-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.product-price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.product-price {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--rose);
+}
+
+.product-price-original {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.product-discount {
+  font-size: 0.75rem;
+  color: var(--teal);
+  font-weight: 500;
+}
+
+/* Color swatches */
+.product-colors {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+/* Star rating */
+.stars {
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+/* Add to cart button */
+.add-to-cart-btn {
+  width: 100%;
+  padding: 0.6rem;
+  background: var(--deep);
+  color: var(--gold-light);
+  border: none;
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+
+.add-to-cart-btn:hover {
+  background: #3D2314;
+}
+
+.add-to-cart-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* ── 8. CART OVERLAY & DRAWER ─────────────────────────────── */
+
+/* Dark overlay behind drawer */
+.cart-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(30,20,16,0.5);
+  z-index: 200;
+}
+
+.cart-overlay.open {
+  display: block;
+}
+
+/* Sliding drawer */
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 420px;
+  max-width: 100vw;
+  height: 100vh;
+  background: var(--cream);
+  z-index: 201;
+  transition: right 0.3s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+}
+
+.cart-drawer.open {
+  right: 0;
+}
+
+/* Cart header */
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--deep);
+}
+
+.cart-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  font-style: italic;
+}
+
+.cart-close {
+  background: none;
+  border: none;
+  color: #C4B49E;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 4px;
+}
+
+.cart-close:hover {
+  color: white;
+}
+
+/* Cart scrollable body */
+.cart-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+/* Empty state */
+.cart-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+}
+
+.cart-empty .empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cart-empty p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Cart item row */
+.cart-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item-img {
+  width: 64px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--warm);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.cart-item-price {
+  font-size: 0.9rem;
+  color: var(--rose);
+  font-weight: 500;
+}
+
+/* Quantity controls */
+.cart-item-qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.qty-btn {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.qty-btn:hover {
+  border-color: var(--gold);
+  background: var(--gold-light);
+}
+
+.qty-num {
+  font-size: 0.9rem;
+  font-weight: 500;
+  min-width: 20px;
+  text-align: center;
+}
+
+.cart-item-remove {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.75rem;
+  margin-top: 6px;
+  text-decoration: underline;
+  transition: color 0.2s;
+  text-align: left;
+  padding: 0;
+}
+
+.cart-item-remove:hover {
+  color: var(--rose);
+}
+
+/* Cart footer / checkout */
+.cart-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  background: white;
+}
+
+.cart-subtotal {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.cart-subtotal .label {
+  color: var(--muted);
+}
+
+.cart-subtotal .amount {
+  font-weight: 500;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--gold);
+  color: var(--deep);
+  border: none;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+
+.checkout-btn:hover {
+  background: #daa94d;
+}
+
+
+/* ── 9. TOAST NOTIFICATION ────────────────────────────────── */
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(4rem);
+  background: var(--deep);
+  color: var(--gold-light);
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  z-index: 300;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  opacity: 0;
+  white-space: nowrap;
+  border: 1px solid rgba(200,150,62,0.3);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+
+/* ── 10. FOOTER ───────────────────────────────────────────── */
+
+footer {
+  background: var(--deep);
+  color: #B09A88;
+  padding: 3rem 2rem 1.5rem;
+  margin-top: 3rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+}
+
+.footer-brand .brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--gold);
+  font-style: italic;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand p {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #8A7060;
+}
+
+.footer-col h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #C4B49E;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col li {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: #8A7060;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer-col li:hover {
+  color: var(--gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 1.5rem;
+  text-align: center;
+  font-size: 0.78rem;
+  color: #5A4A3E;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* ── 11. UTILITIES & RESPONSIVE ───────────────────────────── */
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .nav-links        { display: none; }
+  .footer-grid      { grid-template-columns: 1fr 1fr; }
+  .trust-band       { gap: 2rem; }
+  .hero             { padding: 3rem 1.5rem; }
+  .section          { padding: 2.5rem 1rem; }
+  .cart-drawer      { width: 100vw; }
+}

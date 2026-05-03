@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rang — Indian Ethnic Wear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav>
+    <a class="nav-logo" href="#">Rang</a>
+    <ul class="nav-links">
+      <li><a href="#">New Arrivals</a></li>
+      <li><a href="#">Kurtis</a></li>
+      <li><a href="#">Sarees</a></li>
+      <li><a href="#">Lehengas</a></li>
+      <li><a href="#">Sale</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" onclick="toggleSearch()">&#128269; Search</button>
+      <button class="nav-icon-btn" onclick="openCart()">
+        &#128722; Cart
+        <span class="cart-badge" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===================== SEARCH BAR ===================== -->
+  <div id="search-bar" class="search-wrapper hidden">
+    <input
+      type="text"
+      class="search-input"
+      id="search-input"
+      placeholder="Search for kurtis, sarees, lehengas..."
+      oninput="filterProducts()"
+    />
+    <select class="sort-select" id="sort-select" onchange="filterProducts()">
+      <option value="default">Sort by: Featured</option>
+      <option value="price-asc">Price: Low to High</option>
+      <option value="price-desc">Price: High to Low</option>
+      <option value="discount">Biggest Discount</option>
+    </select>
+  </div>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="hero">
+    <p class="hero-eyebrow">✦ New Collection 2026 ✦</p>
+    <h1>Wear the <em>Art</em><br>of India</h1>
+    <p>Handpicked ethnic wear that blends traditional craftsmanship with modern silhouettes. Pure cotton, genuine fabrics.</p>
+    <button class="hero-cta" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+      Shop Now &rarr;
+    </button>
+    <button class="hero-cta-outline" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+      View Lookbook
+    </button>
+  </section>
+
+  <!-- ===================== TRUST BAND ===================== -->
+  <div class="trust-band">
+    <div class="trust-item">
+      <div class="trust-icon">&#9745;</div>
+      <div class="trust-label">100% Pure Cotton</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">&#128666;</div>
+      <div class="trust-label">Free Delivery &#x20B9;499+</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">&#x21BA;</div>
+      <div class="trust-label">Easy 7-Day Returns</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">&#128274;</div>
+      <div class="trust-label">Secure Payments</div>
+    </div>
+  </div>
+
+  <!-- ===================== PRODUCTS SECTION ===================== -->
+  <div class="section" id="products">
+    <div class="section-header">
+      <h2 class="section-title">Our <span>Collection</span></h2>
+      <button class="view-all" onclick="showAll()">View All</button>
+    </div>
+
+    <!-- Category Filter Pills -->
+    <div class="category-pills" id="category-pills">
+      <button class="pill active" data-cat="all" onclick="setCategory(this, 'all')">All</button>
+      <button class="pill" data-cat="cotton-kurti" onclick="setCategory(this, 'cotton-kurti')">Cotton Kurti</button>
+      <button class="pill" data-cat="anarkali" onclick="setCategory(this, 'anarkali')">Anarkali</button>
+      <button class="pill" data-cat="crepe" onclick="setCategory(this, 'crepe')">Crepe Kurti</button>
+      <button class="pill" data-cat="printed" onclick="setCategory(this, 'printed')">Printed</button>
+      <button class="pill" data-cat="embroidered" onclick="setCategory(this, 'embroidered')">Embroidered</button>
+    </div>
+
+    <!-- Product Cards injected here by JS -->
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+
+  <!-- ===================== CART OVERLAY ===================== -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+
+  <!-- ===================== CART DRAWER ===================== -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <div class="cart-title">Your Cart</div>
+      <button class="cart-close" onclick="closeCart()">&#10005;</button>
+    </div>
+    <div class="cart-body" id="cart-body">
+      <div class="cart-empty">
+        <div class="empty-icon">&#128722;</div>
+        <p>Your cart is empty.<br>Start shopping to add items.</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display:none">
+      <div class="cart-subtotal">
+        <span class="label">Subtotal</span>
+        <span class="amount" id="cart-total">&#x20B9;0</span>
+      </div>
+      <button class="checkout-btn">Proceed to Checkout &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ===================== TOAST NOTIFICATION ===================== -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand">Rang</span>
+        <p>Celebrating the colours of India through handpicked ethnic wear since 2019. Every stitch tells a story.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li>New Arrivals</li>
+          <li>Cotton Kurtis</li>
+          <li>Anarkali Sets</li>
+          <li>Sarees</li>
+          <li>Sale</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li>Size Guide</li>
+          <li>Shipping Info</li>
+          <li>Returns</li>
+          <li>Track Order</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li>Our Story</li>
+          <li>Artisans</li>
+          <li>Sustainability</li>
+          <li>Blog</li>
+          <li>Careers</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Rang Indian Ethnic Wear &bull; All rights reserved &bull; Made with &#10084; in India
+    </div>
+  </footer>
+
+  <!-- JS file linked at bottom so HTML loads first -->
+  <script src="script.js"></script>
+
+</body>
+</html>
