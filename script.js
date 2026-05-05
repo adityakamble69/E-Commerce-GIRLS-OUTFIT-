@@ -1,23 +1,3 @@
-/* ============================================================
-   script.js — Rang Indian Ethnic Wear
-   Sections:
-   1. Product Data
-   2. State Variables
-   3. Helper Functions
-   4. Render Products
-   5. Category & Filter Controls
-   6. Cart Logic
-   7. Cart UI
-   8. Wishlist
-   9. Search Toggle
-   10. Mobile Menu
-   11. Toast Notification
-   12. Init
-============================================================ */
-
-
-/* ── 1. PRODUCT DATA ──────────────────────────────────────── */
-
 const products = [
   {
     id: 1,
@@ -118,15 +98,12 @@ const products = [
 ];
 
 
-/* ── 2. STATE VARIABLES ───────────────────────────────────── */
 
 let cart            = {};
 let currentCategory = 'all';
 let searchQuery     = '';
 let sortOrder       = 'default';
 
-
-/* ── 3. HELPER FUNCTIONS ──────────────────────────────────── */
 
 function getDiscount(price, original) {
   return Math.round((1 - price / original) * 100);
@@ -148,7 +125,6 @@ function buildStars(rating) {
 }
 
 
-/* ── 4. RENDER PRODUCTS ───────────────────────────────────── */
 
 function renderProducts() {
   let filtered = products.filter(function(p) {
@@ -221,7 +197,6 @@ function renderProducts() {
 }
 
 
-/* ── 5. CATEGORY & FILTER CONTROLS ───────────────────────── */
 
 function setCategory(btn, cat) {
   currentCategory = cat;
@@ -252,7 +227,6 @@ function toggleSearch() {
 }
 
 
-/* ── 6. CART LOGIC ────────────────────────────────────────── */
 
 function addToCart(id) {
   const product = products.find(x => x.id === id);
@@ -280,7 +254,6 @@ function changeQty(id, delta) {
 }
 
 
-/* ── 7. CART UI ───────────────────────────────────────────── */
 
 function updateCartUI() {
   const items    = Object.values(cart);
@@ -331,7 +304,7 @@ function updateCartUI() {
 }
 
 function openCart() {
-  closeMobileMenu(); // close mobile nav if open
+  closeMobileMenu(); 
   document.getElementById('cart-overlay').classList.add('open');
   document.getElementById('cart-drawer').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -344,7 +317,6 @@ function closeCart() {
 }
 
 
-/* ── 8. WISHLIST ──────────────────────────────────────────── */
 
 function toggleWish(id, e) {
   e.stopPropagation();
@@ -360,7 +332,6 @@ function toggleWish(id, e) {
 }
 
 
-/* ── 9. MOBILE MENU ───────────────────────────────────────── */
 
 function toggleMobileMenu() {
   const nav   = document.getElementById('mobile-nav');
@@ -379,7 +350,6 @@ function closeMobileMenu() {
 }
 
 
-/* ── 10. TOAST NOTIFICATION ───────────────────────────────── */
 
 let toastTimer;
 
@@ -394,11 +364,9 @@ function showToast(msg) {
 }
 
 
-/* ── 11. INIT ─────────────────────────────────────────────── */
 
 renderProducts();
 
-// Close mobile nav on overlay click
 document.addEventListener('click', function(e) {
   const nav = document.getElementById('mobile-nav');
   const btn = document.getElementById('hamburger-btn');

@@ -1,23 +1,3 @@
-/* ============================================================
-   style.css — Rang Indian Ethnic Wear
-   Sections:
-   1. Reset & CSS Variables
-   2. Base / Body
-   3. Navigation
-   4. Mobile Nav Drawer
-   5. Search Bar
-   6. Hero Section
-   7. Trust Band
-   8. Products Section
-   9. Cart Overlay & Drawer
-   10. Toast Notification
-   11. Footer
-   12. Utilities & Responsive
-============================================================ */
-
-
-/* ── 1. RESET & CSS VARIABLES ─────────────────────────────── */
-
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -42,7 +22,6 @@
 }
 
 
-/* ── 2. BASE / BODY ───────────────────────────────────────── */
 
 body {
   font-family: 'DM Sans', sans-serif;
@@ -52,7 +31,6 @@ body {
 }
 
 
-/* ── 3. NAVIGATION ────────────────────────────────────────── */
 
 nav {
   background: var(--deep);
@@ -130,7 +108,6 @@ nav {
   text-align: center;
 }
 
-/* Hamburger button — hidden on desktop */
 .hamburger-btn {
   display: none;
   flex-direction: column;
@@ -155,7 +132,6 @@ nav {
   transform-origin: center;
 }
 
-/* Animated X when open */
 .hamburger-btn.open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
@@ -168,7 +144,6 @@ nav {
 }
 
 
-/* ── 4. MOBILE NAV DRAWER ─────────────────────────────────── */
 
 .mobile-nav {
   position: fixed;
@@ -201,9 +176,8 @@ nav {
   display: block;
 }
 
-/* Show overlay when nav is open */
 .mobile-nav.open + .mobile-nav-overlay {
-  display: none; /* handled via JS class */
+  display: none;
 }
 
 .mobile-nav-header {
@@ -259,7 +233,6 @@ nav {
 }
 
 
-/* ── 5. SEARCH BAR ────────────────────────────────────────── */
 
 .search-wrapper {
   max-width: 1200px;
@@ -307,7 +280,6 @@ nav {
 }
 
 
-/* ── 6. HERO SECTION ──────────────────────────────────────── */
 
 .hero {
   background: linear-gradient(135deg, #1E1410 0%, #3D2314 50%, #5C2E1A 100%);
@@ -413,7 +385,6 @@ nav {
 }
 
 
-/* ── 7. TRUST BAND ────────────────────────────────────────── */
 
 .trust-band {
   background: var(--deep);
@@ -446,7 +417,6 @@ nav {
 }
 
 
-/* ── 8. PRODUCTS SECTION ──────────────────────────────────── */
 
 .section {
   padding: 4rem 2rem;
@@ -495,7 +465,6 @@ nav {
   border-color: var(--gold);
 }
 
-/* Category filter pills */
 .category-pills {
   display: flex;
   gap: 0.6rem;
@@ -527,14 +496,12 @@ nav {
   color: var(--text);
 }
 
-/* Product grid */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.5rem;
 }
 
-/* Product card */
 .product-card {
   background: var(--card);
   border-radius: 12px;
@@ -704,7 +671,6 @@ nav {
 }
 
 
-/* ── 9. CART OVERLAY & DRAWER ─────────────────────────────── */
 
 .cart-overlay {
   display: none;
@@ -718,12 +684,11 @@ nav {
   display: block;
 }
 
-/* Cart slides in from the RIGHT */
 .cart-drawer {
   position: fixed;
   top: 0;
   right: -420px;
-  left: auto;        /* override any inherited left */
+  left: auto;        
   width: 400px;
   max-width: 100vw;
   height: 100vh;
@@ -927,8 +892,6 @@ nav {
 }
 
 
-/* ── 10. TOAST NOTIFICATION ───────────────────────────────── */
-
 .toast {
   position: fixed;
   bottom: 2rem;
@@ -955,8 +918,6 @@ nav {
   opacity: 1;
 }
 
-
-/* ── 11. FOOTER ───────────────────────────────────────────── */
 
 footer {
   background: var(--deep);
@@ -1024,13 +985,11 @@ footer {
 }
 
 
-/* ── 12. UTILITIES & RESPONSIVE ───────────────────────────── */
 
 .hidden {
   display: none !important;
 }
 
-/* Tablet */
 @media (max-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1041,9 +1000,7 @@ footer {
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  /* Nav */
   nav {
     padding: 0 1rem;
     height: 58px;
@@ -1054,15 +1011,13 @@ footer {
   }
 
   .nav-links {
-    display: none; /* hidden — show in mobile drawer instead */
+    display: none;
   }
 
-  /* Show hamburger, hide text buttons on small screens */
   .hamburger-btn {
     display: flex;
   }
 
-  /* Compact action buttons on mobile */
   .nav-actions {
     gap: 0.75rem;
   }
@@ -1071,13 +1026,11 @@ footer {
     font-size: 0.9rem;
   }
 
-  /* Show mobile overlay when nav is open */
   .mobile-nav.open ~ #mobile-nav-overlay,
   #mobile-nav-overlay.active {
     display: block;
   }
 
-  /* Search */
   .search-wrapper {
     flex-direction: column;
     padding: 1rem 1rem 0;
@@ -1089,7 +1042,6 @@ footer {
     min-width: unset;
   }
 
-  /* Hero */
   .hero {
     padding: 3rem 1.25rem;
   }
@@ -1111,7 +1063,6 @@ footer {
     justify-content: center;
   }
 
-  /* Trust band */
   .trust-band {
     gap: 1.5rem;
     padding: 1.25rem 1rem;
@@ -1121,7 +1072,6 @@ footer {
     font-size: 0.68rem;
   }
 
-  /* Products */
   .section {
     padding: 2rem 1rem;
   }
@@ -1151,7 +1101,6 @@ footer {
     display: none;
   }
 
-  /* Cart — full width on mobile, slide from right */
   .cart-drawer {
     width: 100vw;
     right: -100vw;
@@ -1161,7 +1110,6 @@ footer {
     right: 0;
   }
 
-  /* Footer */
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
@@ -1172,7 +1120,6 @@ footer {
   }
 }
 
-/* Very small screens */
 @media (max-width: 360px) {
   .product-grid {
     grid-template-columns: 1fr;
