@@ -4,14 +4,15 @@
    1. Reset & CSS Variables
    2. Base / Body
    3. Navigation
-   4. Search Bar
-   5. Hero Section
-   6. Trust Band
-   7. Products Section (Section, Pills, Grid, Cards)
-   8. Cart Overlay & Drawer
-   9. Toast Notification
-   10. Footer
-   11. Utilities & Responsive
+   4. Mobile Nav Drawer
+   5. Search Bar
+   6. Hero Section
+   7. Trust Band
+   8. Products Section
+   9. Cart Overlay & Drawer
+   10. Toast Notification
+   11. Footer
+   12. Utilities & Responsive
 ============================================================ */
 
 
@@ -62,7 +63,7 @@ nav {
   height: 64px;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 300;
 }
 
 .nav-logo {
@@ -72,6 +73,7 @@ nav {
   letter-spacing: 0.1em;
   font-style: italic;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .nav-links {
@@ -105,11 +107,12 @@ nav {
   border: none;
   color: #C4B49E;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: color 0.2s;
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .nav-icon-btn:hover {
@@ -127,13 +130,141 @@ nav {
   text-align: center;
 }
 
+/* Hamburger button — hidden on desktop */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
 
-/* ── 4. SEARCH BAR ────────────────────────────────────────── */
+.hamburger-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #C4B49E;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animated X when open */
+.hamburger-btn.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger-btn.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger-btn.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* ── 4. MOBILE NAV DRAWER ─────────────────────────────────── */
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 280px;
+  height: 100vh;
+  background: var(--deep);
+  z-index: 500;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.mobile-nav.open {
+  left: 0;
+}
+
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 400;
+}
+
+.mobile-nav-overlay.show,
+.mobile-nav.open ~ .mobile-nav-overlay {
+  display: block;
+}
+
+/* Show overlay when nav is open */
+.mobile-nav.open + .mobile-nav-overlay {
+  display: none; /* handled via JS class */
+}
+
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(200,150,62,0.2);
+}
+
+.mobile-nav-close {
+  background: none;
+  border: none;
+  color: #C4B49E;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+.mobile-nav-close:hover { color: white; }
+
+.mobile-nav-links {
+  list-style: none;
+  padding: 1rem 0;
+  flex: 1;
+}
+
+.mobile-nav-links li a {
+  display: block;
+  padding: 0.85rem 1.5rem;
+  color: #C4B49E;
+  text-decoration: none;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 400;
+  border-bottom: 1px solid rgba(200,150,62,0.08);
+  transition: all 0.2s;
+}
+
+.mobile-nav-links li a:hover {
+  color: var(--gold);
+  background: rgba(200,150,62,0.06);
+  padding-left: 2rem;
+}
+
+.mobile-nav-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid rgba(200,150,62,0.15);
+  font-size: 0.8rem;
+  color: #5A4A3E;
+  line-height: 1.8;
+}
+
+
+/* ── 5. SEARCH BAR ────────────────────────────────────────── */
 
 .search-wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 2rem 0;
+  padding: 1.5rem 2rem 0;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -150,6 +281,7 @@ nav {
   color: var(--text);
   outline: none;
   transition: border-color 0.2s;
+  min-width: 0;
 }
 
 .search-input:focus {
@@ -170,11 +302,12 @@ nav {
   color: var(--text);
   outline: none;
   cursor: pointer;
-  min-width: 160px;
+  min-width: 140px;
+  flex-shrink: 0;
 }
 
 
-/* ── 5. HERO SECTION ──────────────────────────────────────── */
+/* ── 6. HERO SECTION ──────────────────────────────────────── */
 
 .hero {
   background: linear-gradient(135deg, #1E1410 0%, #3D2314 50%, #5C2E1A 100%);
@@ -184,7 +317,6 @@ nav {
   overflow: hidden;
 }
 
-/* Decorative glow circle behind heading */
 .hero::before {
   content: '';
   position: absolute;
@@ -208,7 +340,7 @@ nav {
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
   color: #FDF8F2;
   line-height: 1.15;
   margin-bottom: 1.25rem;
@@ -220,13 +352,20 @@ nav {
   font-style: italic;
 }
 
-.hero p {
+.hero > p {
   color: #B09A88;
   font-size: 1.05rem;
   max-width: 480px;
   margin: 0 auto 2rem;
   line-height: 1.7;
   font-weight: 300;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .hero-cta {
@@ -266,7 +405,6 @@ nav {
   transition: border-color 0.2s, background 0.2s;
   cursor: pointer;
   background: none;
-  margin-left: 1rem;
 }
 
 .hero-cta-outline:hover {
@@ -275,14 +413,14 @@ nav {
 }
 
 
-/* ── 6. TRUST BAND ────────────────────────────────────────── */
+/* ── 7. TRUST BAND ────────────────────────────────────────── */
 
 .trust-band {
   background: var(--deep);
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   display: flex;
   justify-content: center;
-  gap: 4rem;
+  gap: 3rem;
   flex-wrap: wrap;
 }
 
@@ -300,7 +438,7 @@ nav {
 }
 
 .trust-label {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: #C4B49E;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -308,9 +446,8 @@ nav {
 }
 
 
-/* ── 7. PRODUCTS SECTION ──────────────────────────────────── */
+/* ── 8. PRODUCTS SECTION ──────────────────────────────────── */
 
-/* Section wrapper */
 .section {
   padding: 4rem 2rem;
   max-width: 1200px;
@@ -339,7 +476,6 @@ nav {
 .view-all {
   font-size: 0.8rem;
   color: var(--gold-dark);
-  text-decoration: none;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
@@ -351,6 +487,7 @@ nav {
   border-left: none;
   border-right: none;
   transition: color 0.2s;
+  white-space: nowrap;
 }
 
 .view-all:hover {
@@ -361,21 +498,22 @@ nav {
 /* Category filter pills */
 .category-pills {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
   margin-bottom: 2.5rem;
 }
 
 .pill {
-  padding: 0.5rem 1.25rem;
+  padding: 0.45rem 1.1rem;
   border-radius: 100px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 400;
   cursor: pointer;
   transition: all 0.2s;
   border: 1.5px solid var(--border);
   background: white;
   color: var(--muted);
+  white-space: nowrap;
 }
 
 .pill.active {
@@ -412,7 +550,6 @@ nav {
   box-shadow: 0 12px 40px rgba(30,20,16,0.12);
 }
 
-/* Product image area */
 .product-img-wrapper {
   position: relative;
   aspect-ratio: 3/4;
@@ -425,13 +562,13 @@ nav {
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s;
+  display: block;
 }
 
 .product-card:hover .product-img-wrapper img {
   transform: scale(1.04);
 }
 
-/* Sale / New badge */
 .product-badge {
   position: absolute;
   top: 12px;
@@ -443,13 +580,13 @@ nav {
   padding: 3px 10px;
   border-radius: 100px;
   letter-spacing: 0.04em;
+  z-index: 1;
 }
 
 .product-badge.new {
   background: var(--teal);
 }
 
-/* Wishlist heart button */
 .product-wishlist {
   position: absolute;
   top: 12px;
@@ -466,6 +603,7 @@ nav {
   transition: all 0.2s;
   font-size: 0.85rem;
   color: #C8963E;
+  z-index: 1;
 }
 
 .product-wishlist:hover,
@@ -475,7 +613,6 @@ nav {
   color: var(--rose);
 }
 
-/* Product text info */
 .product-info {
   padding: 1rem 1.25rem 1.25rem;
 }
@@ -490,10 +627,11 @@ nav {
 
 .product-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 400;
   color: var(--text);
   margin-bottom: 8px;
+  line-height: 1.3;
 }
 
 .product-price-row {
@@ -501,6 +639,7 @@ nav {
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .product-price {
@@ -521,7 +660,6 @@ nav {
   font-weight: 500;
 }
 
-/* Color swatches */
 .product-colors {
   display: flex;
   gap: 6px;
@@ -536,17 +674,15 @@ nav {
   cursor: pointer;
 }
 
-/* Star rating */
 .stars {
   color: var(--gold);
   font-size: 0.75rem;
   letter-spacing: 1px;
 }
 
-/* Add to cart button */
 .add-to-cart-btn {
   width: 100%;
-  padding: 0.6rem;
+  padding: 0.65rem;
   background: var(--deep);
   color: var(--gold-light);
   border: none;
@@ -568,31 +704,31 @@ nav {
 }
 
 
-/* ── 8. CART OVERLAY & DRAWER ─────────────────────────────── */
+/* ── 9. CART OVERLAY & DRAWER ─────────────────────────────── */
 
-/* Dark overlay behind drawer */
 .cart-overlay {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(30,20,16,0.5);
-  z-index: 200;
+  z-index: 350;
 }
 
 .cart-overlay.open {
   display: block;
 }
 
-/* Sliding drawer */
+/* Cart slides in from the RIGHT */
 .cart-drawer {
   position: fixed;
   top: 0;
   right: -420px;
-  width: 420px;
+  left: auto;        /* override any inherited left */
+  width: 400px;
   max-width: 100vw;
   height: 100vh;
   background: var(--cream);
-  z-index: 201;
+  z-index: 360;
   transition: right 0.3s cubic-bezier(0.4,0,0.2,1);
   display: flex;
   flex-direction: column;
@@ -603,7 +739,6 @@ nav {
   right: 0;
 }
 
-/* Cart header */
 .cart-header {
   display: flex;
   align-items: center;
@@ -611,6 +746,7 @@ nav {
   padding: 1.25rem 1.5rem;
   border-bottom: 1px solid var(--border);
   background: var(--deep);
+  flex-shrink: 0;
 }
 
 .cart-title {
@@ -627,21 +763,20 @@ nav {
   font-size: 1.2rem;
   cursor: pointer;
   transition: color 0.2s;
-  padding: 4px;
+  padding: 4px 8px;
+  line-height: 1;
 }
 
 .cart-close:hover {
   color: white;
 }
 
-/* Cart scrollable body */
 .cart-body {
   flex: 1;
   overflow-y: auto;
   padding: 1.5rem;
 }
 
-/* Empty state */
 .cart-empty {
   text-align: center;
   padding: 3rem 1rem;
@@ -658,7 +793,6 @@ nav {
   line-height: 1.6;
 }
 
-/* Cart item row */
 .cart-item {
   display: flex;
   gap: 12px;
@@ -670,7 +804,7 @@ nav {
   width: 64px;
   height: 80px;
   border-radius: 8px;
-  object-fit: cover;
+  overflow: hidden;
   background: var(--warm);
   flex-shrink: 0;
   display: flex;
@@ -681,13 +815,15 @@ nav {
 
 .cart-item-details {
   flex: 1;
+  min-width: 0;
 }
 
 .cart-item-name {
   font-family: 'Playfair Display', serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text);
   margin-bottom: 4px;
+  line-height: 1.3;
 }
 
 .cart-item-price {
@@ -696,7 +832,6 @@ nav {
   font-weight: 500;
 }
 
-/* Quantity controls */
 .cart-item-qty {
   display: flex;
   align-items: center;
@@ -705,18 +840,19 @@ nav {
 }
 
 .qty-btn {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border: 1px solid var(--border);
   border-radius: 4px;
   background: white;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.15s;
+  flex-shrink: 0;
 }
 
 .qty-btn:hover {
@@ -742,17 +878,18 @@ nav {
   transition: color 0.2s;
   text-align: left;
   padding: 0;
+  display: block;
 }
 
 .cart-item-remove:hover {
   color: var(--rose);
 }
 
-/* Cart footer / checkout */
 .cart-footer {
   padding: 1.5rem;
   border-top: 1px solid var(--border);
   background: white;
+  flex-shrink: 0;
 }
 
 .cart-subtotal {
@@ -762,9 +899,7 @@ nav {
   font-size: 0.95rem;
 }
 
-.cart-subtotal .label {
-  color: var(--muted);
-}
+.cart-subtotal .label { color: var(--muted); }
 
 .cart-subtotal .amount {
   font-weight: 500;
@@ -792,7 +927,7 @@ nav {
 }
 
 
-/* ── 9. TOAST NOTIFICATION ────────────────────────────────── */
+/* ── 10. TOAST NOTIFICATION ───────────────────────────────── */
 
 .toast {
   position: fixed;
@@ -806,11 +941,13 @@ nav {
   font-size: 0.875rem;
   font-weight: 400;
   letter-spacing: 0.02em;
-  z-index: 300;
+  z-index: 600;
   transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
   opacity: 0;
   white-space: nowrap;
   border: 1px solid rgba(200,150,62,0.3);
+  max-width: 90vw;
+  text-align: center;
 }
 
 .toast.show {
@@ -819,7 +956,7 @@ nav {
 }
 
 
-/* ── 10. FOOTER ───────────────────────────────────────────── */
+/* ── 11. FOOTER ───────────────────────────────────────────── */
 
 footer {
   background: var(--deep);
@@ -887,17 +1024,161 @@ footer {
 }
 
 
-/* ── 11. UTILITIES & RESPONSIVE ───────────────────────────── */
+/* ── 12. UTILITIES & RESPONSIVE ───────────────────────────── */
 
 .hidden {
   display: none !important;
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-  .nav-links        { display: none; }
-  .footer-grid      { grid-template-columns: 1fr 1fr; }
-  .trust-band       { gap: 2rem; }
-  .hero             { padding: 3rem 1.5rem; }
-  .section          { padding: 2.5rem 1rem; }
-  .cart-drawer      { width: 100vw; }
+  /* Nav */
+  nav {
+    padding: 0 1rem;
+    height: 58px;
+  }
+
+  .nav-logo {
+    font-size: 1.5rem;
+  }
+
+  .nav-links {
+    display: none; /* hidden — show in mobile drawer instead */
+  }
+
+  /* Show hamburger, hide text buttons on small screens */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* Compact action buttons on mobile */
+  .nav-actions {
+    gap: 0.75rem;
+  }
+
+  .nav-icon-btn {
+    font-size: 0.9rem;
+  }
+
+  /* Show mobile overlay when nav is open */
+  .mobile-nav.open ~ #mobile-nav-overlay,
+  #mobile-nav-overlay.active {
+    display: block;
+  }
+
+  /* Search */
+  .search-wrapper {
+    flex-direction: column;
+    padding: 1rem 1rem 0;
+    gap: 0.75rem;
+  }
+
+  .sort-select {
+    width: 100%;
+    min-width: unset;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 3rem 1.25rem;
+  }
+
+  .hero > p {
+    font-size: 0.95rem;
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-cta,
+  .hero-cta-outline {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  /* Trust band */
+  .trust-band {
+    gap: 1.5rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .trust-label {
+    font-size: 0.68rem;
+  }
+
+  /* Products */
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+  }
+
+  .product-info {
+    padding: 0.75rem 0.9rem 1rem;
+  }
+
+  .product-name {
+    font-size: 0.88rem;
+  }
+
+  .category-pills {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .category-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cart — full width on mobile, slide from right */
+  .cart-drawer {
+    width: 100vw;
+    right: -100vw;
+  }
+
+  .cart-drawer.open {
+    right: 0;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
 }

@@ -12,6 +12,8 @@
   <!-- ===================== NAVIGATION ===================== -->
   <nav>
     <a class="nav-logo" href="#">Rang</a>
+
+    <!-- Desktop links -->
     <ul class="nav-links">
       <li><a href="#">New Arrivals</a></li>
       <li><a href="#">Kurtis</a></li>
@@ -19,14 +21,41 @@
       <li><a href="#">Lehengas</a></li>
       <li><a href="#">Sale</a></li>
     </ul>
+
     <div class="nav-actions">
       <button class="nav-icon-btn" onclick="toggleSearch()">&#128269; Search</button>
       <button class="nav-icon-btn" onclick="openCart()">
         &#128722; Cart
         <span class="cart-badge" id="cart-count">0</span>
       </button>
+      <!-- Hamburger (mobile only) -->
+      <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- ===================== MOBILE NAV DRAWER ===================== -->
+  <div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-header">
+      <span class="nav-logo" style="font-size:1.5rem">Rang</span>
+      <button class="mobile-nav-close" onclick="closeMobileMenu()">&#10005;</button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="#" onclick="closeMobileMenu()">New Arrivals</a></li>
+      <li><a href="#" onclick="closeMobileMenu()">Kurtis</a></li>
+      <li><a href="#" onclick="closeMobileMenu()">Sarees</a></li>
+      <li><a href="#" onclick="closeMobileMenu()">Lehengas</a></li>
+      <li><a href="#" onclick="closeMobileMenu()">Sale</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <p>🇮🇳 Free delivery on orders above ₹499</p>
+      <p>Easy 7-day returns</p>
+    </div>
+  </div>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay" onclick="closeMobileMenu()"></div>
 
   <!-- ===================== SEARCH BAR ===================== -->
   <div id="search-bar" class="search-wrapper hidden">
@@ -50,12 +79,14 @@
     <p class="hero-eyebrow">✦ New Collection 2026 ✦</p>
     <h1>Wear the <em>Art</em><br>of India</h1>
     <p>Handpicked ethnic wear that blends traditional craftsmanship with modern silhouettes. Pure cotton, genuine fabrics.</p>
-    <button class="hero-cta" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
-      Shop Now &rarr;
-    </button>
-    <button class="hero-cta-outline" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
-      View Lookbook
-    </button>
+    <div class="hero-btns">
+      <button class="hero-cta" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+        Shop Now &rarr;
+      </button>
+      <button class="hero-cta-outline" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+        View Lookbook
+      </button>
+    </div>
   </section>
 
   <!-- ===================== TRUST BAND ===================== -->
@@ -85,7 +116,6 @@
       <button class="view-all" onclick="showAll()">View All</button>
     </div>
 
-    <!-- Category Filter Pills -->
     <div class="category-pills" id="category-pills">
       <button class="pill active" data-cat="all" onclick="setCategory(this, 'all')">All</button>
       <button class="pill" data-cat="cotton-kurti" onclick="setCategory(this, 'cotton-kurti')">Cotton Kurti</button>
@@ -95,7 +125,6 @@
       <button class="pill" data-cat="embroidered" onclick="setCategory(this, 'embroidered')">Embroidered</button>
     </div>
 
-    <!-- Product Cards injected here by JS -->
     <div class="product-grid" id="product-grid"></div>
   </div>
 
@@ -169,8 +198,6 @@
     </div>
   </footer>
 
-  <!-- JS file linked at bottom so HTML loads first -->
   <script src="script.js"></script>
-
 </body>
 </html>

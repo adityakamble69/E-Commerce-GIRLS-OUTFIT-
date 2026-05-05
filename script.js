@@ -10,8 +10,9 @@
    7. Cart UI
    8. Wishlist
    9. Search Toggle
-   10. Toast Notification
-   11. Init
+   10. Mobile Menu
+   11. Toast Notification
+   12. Init
 ============================================================ */
 
 
@@ -20,145 +21,128 @@
 const products = [
   {
     id: 1,
-    name: 'Cotton Kurti',
-    category: 'cotton-kurti',
-    price: 420,
-    original: 600,
-    emoji: '🎪',
-    badge: '',
-    colors: ['#E87B7B', '#7BB5E8', '#7BE87E'],
-    rating: 4,
+    name: 'Blue Floral Embroidered Kurti',
+    category: 'embroidered',
+    price: 950,
+    original: 1400,
+    image: 'img1.jpeg',
+    badge: 'sale',
+    colors: ['#1A4F8A', '#FFFFFF', '#C8963E'],
+    rating: 5,
     reviews: 128
   },
   {
     id: 2,
-    name: 'Anarkali Kurti',
+    name: 'Purple Mirror Work Suit',
     category: 'anarkali',
     price: 800,
     original: 1100,
-    emoji: '💜',
+    image: 'img2.png',
     badge: 'sale',
-    colors: ['#FFD700', '#FF6B6B', '#9B59B6'],
+    colors: ['#6A1B9A', '#C8963E', '#212121'],
     rating: 5,
     reviews: 89
   },
   {
     id: 3,
-    name: 'Crepe Kurti',
-    category: 'crepe',
-    price: 275,
-    original: 400,
-    emoji: '🧡',
-    badge: 'new',
-    colors: ['#2E7D8A', '#8A2E7D', '#2E8A4C'],
-    rating: 4,
-    reviews: 56
+    name: 'Yellow Floral Anarkali Set',
+    category: 'anarkali',
+    price: 1100,
+    original: 1600,
+    image: 'img3.png',
+    badge: '',
+    colors: ['#F9A825', '#E53935', '#43A047'],
+    rating: 5,
+    reviews: 36
   },
   {
     id: 4,
-    name: 'Printed Kurti',
+    name: 'Maroon Block Print Kurti',
     category: 'printed',
-    price: 350,
-    original: 500,
-    emoji: '🌸',
-    badge: '',
-    colors: ['#FF8C42', '#FF4242', '#42B8FF'],
+    price: 420,
+    original: 600,
+    image: 'img4.png',
+    badge: 'new',
+    colors: ['#8D1A2A', '#3B4A6B', '#FAFAFA'],
     rating: 4,
     reviews: 203
   },
   {
     id: 5,
-    name: 'Embroidered Kurti',
+    name: 'Wine Chikankari Suit',
     category: 'embroidered',
-    price: 950,
-    original: 1400,
-    emoji: '🎠',
+    price: 1350,
+    original: 1900,
+    image: 'img5.png',
     badge: 'sale',
-    colors: ['#C8963E', '#8B0000', '#006400'],
+    colors: ['#6B1A3A', '#FFFFFF', '#C8963E'],
     rating: 5,
     reviews: 44
   },
   {
     id: 6,
-    name: 'Rayon Kurti',
-    category: 'cotton-kurti',
-    price: 380,
-    original: 520,
-    emoji: '💠',
+    name: 'Red Mughal Print Kurti',
+    category: 'printed',
+    price: 490,
+    original: 700,
+    image: 'img6.png',
     badge: 'new',
-    colors: ['#FF69B4', '#4169E1', '#32CD32'],
+    colors: ['#B71C1C', '#1A237E', '#FAFAFA'],
+    rating: 4,
+    reviews: 92
+  },
+  {
+    id: 7,
+    name: 'Blue Asymmetric Kurti',
+    category: 'cotton-kurti',
+    price: 750,
+    original: 1050,
+    image: 'img7.png',
+    badge: '',
+    colors: ['#1A4F8A', '#FFFFFF', '#C8963E'],
     rating: 4,
     reviews: 71
   },
   {
-    id: 7,
-    name: 'Floral Anarkali',
-    category: 'anarkali',
-    price: 1100,
-    original: 1600,
-    emoji: '🍓',
-    badge: '',
-    colors: ['#FF6347', '#FFA500', '#ADFF2F'],
-    rating: 5,
-    reviews: 36
-  },
-  {
     id: 8,
-    name: 'Block Print Kurti',
-    category: 'printed',
-    price: 490,
-    original: 700,
-    emoji: '🌎',
+    name: 'Crepe Straight Kurti',
+    category: 'crepe',
+    price: 275,
+    original: 400,
+    image: 'img2.png',
     badge: 'new',
-    colors: ['#8B4513', '#2F4F4F', '#800000'],
+    colors: ['#2E7D8A', '#8A2E7D', '#2E8A4C'],
     rating: 4,
-    reviews: 92
+    reviews: 56
   }
 ];
 
 
 /* ── 2. STATE VARIABLES ───────────────────────────────────── */
 
-let cart            = {};       // { productId: { ...product, qty } }
-let currentCategory = 'all';   // active filter pill
-let searchQuery     = '';       // live search text
-let sortOrder       = 'default'; // dropdown sort value
+let cart            = {};
+let currentCategory = 'all';
+let searchQuery     = '';
+let sortOrder       = 'default';
 
 
 /* ── 3. HELPER FUNCTIONS ──────────────────────────────────── */
 
-/**
- * Calculate discount percentage between sale and original price.
- * @param {number} price    - Sale price
- * @param {number} original - Original price
- * @returns {number} Discount as a whole percentage
- */
 function getDiscount(price, original) {
   return Math.round((1 - price / original) * 100);
 }
 
-/**
- * Return a soft background colour for each product category.
- * Used in the image placeholder and cart item thumbnail.
- * @param {string} cat - Category slug
- * @returns {string} CSS colour value
- */
 function getCategoryBg(cat) {
   const map = {
-    'cotton-kurti': '#FFF0F0',
+    'cotton-kurti': '#EEF3FA',
     'anarkali':     '#FFF8E1',
     'crepe':        '#E8F5E9',
-    'printed':      '#E3F2FD',
-    'embroidered':  '#FCE4EC'
+    'printed':      '#FDECEA',
+    'embroidered':  '#F3E5F5'
   };
   return map[cat] || '#F9F4EE';
 }
 
-/**
- * Build star-rating HTML string.
- * @param {number} rating - Integer 1–5
- * @returns {string} HTML with filled and empty stars
- */
 function buildStars(rating) {
   return '★'.repeat(rating) + '☆'.repeat(5 - rating);
 }
@@ -166,24 +150,17 @@ function buildStars(rating) {
 
 /* ── 4. RENDER PRODUCTS ───────────────────────────────────── */
 
-/**
- * Filter, sort and inject product cards into #product-grid.
- * Called on load and whenever filters change.
- */
 function renderProducts() {
-  /* --- Filter --- */
   let filtered = products.filter(function(p) {
     const matchCat    = (currentCategory === 'all') || (p.category === currentCategory);
     const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchCat && matchSearch;
   });
 
-  /* --- Sort --- */
   if (sortOrder === 'price-asc')  filtered.sort((a, b) => a.price - b.price);
   if (sortOrder === 'price-desc') filtered.sort((a, b) => b.price - a.price);
   if (sortOrder === 'discount')   filtered.sort((a, b) => getDiscount(b.price, b.original) - getDiscount(a.price, a.original));
 
-  /* --- Inject HTML --- */
   const grid = document.getElementById('product-grid');
 
   if (filtered.length === 0) {
@@ -192,31 +169,24 @@ function renderProducts() {
   }
 
   grid.innerHTML = filtered.map(function(p) {
-    /* Badge markup — only if product has a badge */
     const badgeHTML = p.badge
       ? `<span class="product-badge ${p.badge === 'new' ? 'new' : ''}">${p.badge === 'new' ? 'New' : 'Sale'}</span>`
       : '';
 
-    /* Colour swatches */
     const colorDots = p.colors
       .map(c => `<div class="color-dot" style="background:${c}" title="${c}"></div>`)
       .join('');
 
     return `
       <div class="product-card" id="card-${p.id}">
-
-        <!-- Image / Emoji placeholder -->
         <div class="product-img-wrapper">
-          <div style="
-            width:100%; height:100%;
-            display:flex; align-items:center; justify-content:center;
-            font-size:4.5rem;
-            background:${getCategoryBg(p.category)}
-          ">${p.emoji}</div>
-
+          <img
+            src="${p.image}"
+            alt="${p.name}"
+            loading="lazy"
+            onerror="this.parentElement.style.background='${getCategoryBg(p.category)}'; this.style.display='none';"
+          />
           ${badgeHTML}
-
-          <!-- Wishlist heart -->
           <button
             class="product-wishlist"
             id="wish-${p.id}"
@@ -224,7 +194,6 @@ function renderProducts() {
           >&#9825;</button>
         </div>
 
-        <!-- Text info -->
         <div class="product-info">
           <div class="product-category">${p.category.replace('-', ' ')}</div>
           <div class="product-name">${p.name}</div>
@@ -246,7 +215,6 @@ function renderProducts() {
             Add to Cart
           </button>
         </div>
-
       </div>
     `;
   }).join('');
@@ -255,12 +223,6 @@ function renderProducts() {
 
 /* ── 5. CATEGORY & FILTER CONTROLS ───────────────────────── */
 
-/**
- * Set active category pill and re-render.
- * Called from pill onclick in HTML.
- * @param {HTMLElement} btn - The clicked pill button
- * @param {string}      cat - Category slug
- */
 function setCategory(btn, cat) {
   currentCategory = cat;
   document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
@@ -268,10 +230,6 @@ function setCategory(btn, cat) {
   renderProducts();
 }
 
-/**
- * Show all products — resets category to 'all'.
- * Called from "View All" button.
- */
 function showAll() {
   currentCategory = 'all';
   document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
@@ -279,25 +237,15 @@ function showAll() {
   renderProducts();
 }
 
-/**
- * Read search input and sort dropdown, then re-render.
- * Bound to oninput / onchange in HTML.
- */
 function filterProducts() {
   searchQuery = document.getElementById('search-input').value;
   sortOrder   = document.getElementById('sort-select').value;
   renderProducts();
 }
 
-/**
- * Toggle the search bar visibility.
- * Called from Search nav button.
- */
 function toggleSearch() {
   const bar = document.getElementById('search-bar');
   bar.classList.toggle('hidden');
-
-  /* Auto-focus the input when opening */
   if (!bar.classList.contains('hidden')) {
     document.getElementById('search-input').focus();
   }
@@ -306,10 +254,6 @@ function toggleSearch() {
 
 /* ── 6. CART LOGIC ────────────────────────────────────────── */
 
-/**
- * Add a product to the cart or increment its quantity.
- * @param {number} id - Product ID
- */
 function addToCart(id) {
   const product = products.find(x => x.id === id);
   if (!product) return;
@@ -323,51 +267,30 @@ function addToCart(id) {
   showToast(product.name + ' added to cart');
 }
 
-/**
- * Remove a product entirely from the cart.
- * @param {number} id - Product ID
- */
 function removeFromCart(id) {
   delete cart[id];
   updateCartUI();
 }
 
-/**
- * Increment or decrement a cart item's quantity.
- * Removes the item if qty reaches 0.
- * @param {number} id    - Product ID
- * @param {number} delta - +1 or -1
- */
 function changeQty(id, delta) {
   if (!cart[id]) return;
-
   cart[id].qty += delta;
-
-  if (cart[id].qty <= 0) {
-    delete cart[id];
-  }
-
+  if (cart[id].qty <= 0) delete cart[id];
   updateCartUI();
 }
 
 
 /* ── 7. CART UI ───────────────────────────────────────────── */
 
-/**
- * Re-render the entire cart drawer UI based on current cart state.
- * Updates: badge count, item list, subtotal, footer visibility.
- */
 function updateCartUI() {
-  const items = Object.values(cart);
+  const items    = Object.values(cart);
   const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
 
-  /* Update nav badge */
   document.getElementById('cart-count').textContent = totalQty;
 
   const body   = document.getElementById('cart-body');
   const footer = document.getElementById('cart-footer');
 
-  /* Empty state */
   if (items.length === 0) {
     body.innerHTML = `
       <div class="cart-empty">
@@ -379,54 +302,41 @@ function updateCartUI() {
     return;
   }
 
-  /* Show footer with subtotal */
   footer.style.display = 'block';
 
   const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
-  document.getElementById('cart-total').textContent =
-    '\u20B9' + total.toLocaleString('en-IN');
+  document.getElementById('cart-total').textContent = '\u20B9' + total.toLocaleString('en-IN');
 
-  /* Build cart item rows */
   body.innerHTML = items.map(function(item) {
     return `
       <div class="cart-item">
-
-        <!-- Emoji thumbnail -->
         <div class="cart-item-img" style="background:${getCategoryBg(item.category)}">
-          ${item.emoji}
+          <img src="${item.image}" alt="${item.name}"
+               style="width:100%;height:100%;object-fit:cover;border-radius:8px;"
+               onerror="this.style.display='none';" />
         </div>
-
         <div class="cart-item-details">
           <div class="cart-item-name">${item.name}</div>
           <div class="cart-item-price">&#x20B9;${item.price}</div>
-
-          <!-- Qty controls -->
           <div class="cart-item-qty">
             <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
             <span class="qty-num">${item.qty}</span>
             <button class="qty-btn" onclick="changeQty(${item.id}, +1)">+</button>
           </div>
-
           <button class="cart-item-remove" onclick="removeFromCart(${item.id})">Remove</button>
         </div>
-
       </div>
     `;
   }).join('');
 }
 
-/**
- * Open the cart drawer (shows overlay + slides drawer in).
- */
 function openCart() {
+  closeMobileMenu(); // close mobile nav if open
   document.getElementById('cart-overlay').classList.add('open');
   document.getElementById('cart-drawer').classList.add('open');
-  document.body.style.overflow = 'hidden'; /* prevent background scroll */
+  document.body.style.overflow = 'hidden';
 }
 
-/**
- * Close the cart drawer.
- */
 function closeCart() {
   document.getElementById('cart-overlay').classList.remove('open');
   document.getElementById('cart-drawer').classList.remove('open');
@@ -436,41 +346,47 @@ function closeCart() {
 
 /* ── 8. WISHLIST ──────────────────────────────────────────── */
 
-/**
- * Toggle the wishlist heart on a product card.
- * @param {number}     id - Product ID
- * @param {MouseEvent} e  - Click event (to stop propagation)
- */
 function toggleWish(id, e) {
-  e.stopPropagation(); /* don't trigger card click */
-
+  e.stopPropagation();
   const btn = document.getElementById('wish-' + id);
   btn.classList.toggle('active');
-
   if (btn.classList.contains('active')) {
-    btn.innerHTML = '&#9829;'; /* filled heart */
+    btn.innerHTML = '&#9829;';
     showToast('Added to wishlist \u2661');
   } else {
-    btn.innerHTML = '&#9825;'; /* empty heart */
+    btn.innerHTML = '&#9825;';
     showToast('Removed from wishlist');
   }
 }
 
 
-/* ── 9. TOAST NOTIFICATION ────────────────────────────────── */
+/* ── 9. MOBILE MENU ───────────────────────────────────────── */
 
-let toastTimer; /* holds the auto-hide timeout reference */
+function toggleMobileMenu() {
+  const nav   = document.getElementById('mobile-nav');
+  const btn   = document.getElementById('hamburger-btn');
+  const isOpen = nav.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
 
-/**
- * Show a brief toast message at the bottom of the screen.
- * Auto-hides after 2.2 seconds.
- * @param {string} msg - Message to display
- */
+function closeMobileMenu() {
+  const nav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('hamburger-btn');
+  nav.classList.remove('open');
+  btn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+
+/* ── 10. TOAST NOTIFICATION ───────────────────────────────── */
+
+let toastTimer;
+
 function showToast(msg) {
   const toast = document.getElementById('toast');
   toast.textContent = msg;
   toast.classList.add('show');
-
   clearTimeout(toastTimer);
   toastTimer = setTimeout(function() {
     toast.classList.remove('show');
@@ -478,7 +394,17 @@ function showToast(msg) {
 }
 
 
-/* ── 10. INIT ─────────────────────────────────────────────── */
+/* ── 11. INIT ─────────────────────────────────────────────── */
 
-/* Render product grid as soon as the script loads */
 renderProducts();
+
+// Close mobile nav on overlay click
+document.addEventListener('click', function(e) {
+  const nav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('hamburger-btn');
+  if (nav && nav.classList.contains('open')) {
+    if (!nav.contains(e.target) && !btn.contains(e.target)) {
+      closeMobileMenu();
+    }
+  }
+});
